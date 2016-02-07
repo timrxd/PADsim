@@ -12,9 +12,13 @@ If I continue this, I'll probably rewrite the whole thing in python.
 Also, there's technically a bug in the match-3 algorithm:
 
 0 0 0 0 0 0 
+
 X 0 0 0 0 0 
+
 X 0 0 0 0 0 
+
 X X 0 0 0 0 
+
 0 X X X 0 0 
 
 This will register as only 1 match, but that bridge orb won't be removed.
