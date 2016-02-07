@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<script src="toolbox.js"></script>
+<script src="PADsim.js"></script>
+<link rel="stylesheet" href="style.css">
+<title>PADsim</title>
+
+	<body onload="startup()">
+
+			<p id="debug" style="display:noneX; margin-top:0px;margin-bottom:0px">Hello</p>
+		
+	
+		
+		
+		<div id=board style="float:left; width:301px; background-image:url('light_bg.png')" >
+			<img id="11"><img id="12"><img id="13"><img id="14"><img id="15"><img id="16"><br>
+			<img id="21"><img id="22"><img id="23"><img id="24"><img id="25"><img id="26"><br>
+			<img id="31"><img id="32"><img id="33"><img id="34"><img id="35"><img id="36"><br>
+			<img id="41"><img id="42"><img id="43"><img id="44"><img id="45"><img id="46"><br>
+			<img id="51"><img id="52"><img id="53"><img id="54"><img id="55"><img id="56"><br>
+		</div >	
+
+		<div style="padding-left:20px">
+			<div style="float:left;padding-top:15px;padding-left:5px;padding-right5px">Orb Types:</div> 
+			<div style="float:left;width:50px"><img id= "red" src="red_orb.png" onclick=selectColor("r") ></div>
+			<div style="float:left;width:50px"><img id= "blue" src="blue_orb.png" onclick=selectColor("b") ></div>
+			<div style="float:left;width:50px"><img id= "green" src="green_orb.png" onclick=selectColor("g") ></div>
+			<div style="float:left;width:50px"><img id= "dark" src="dark_orb.png" onclick=selectColor("d") ></div>
+			<div style="float:left;width:50px"><img id= "light" src="light_orb.png" onclick=selectColor("l") ></div>
+			<div style="float:left;width:50px"><img id= "heart" src="heart_orb.png" onclick=selectColor("h") ></div>
+
+		</div>
+
+		<div style="float:right; right:20%;height:270px;width:300px;background:lightgray;position:relative;padding-left:20px"> 
+			<p id="matches">
+				Matches:
+			</p>
+		</div>
+			
+		<div style="padding-left:20px">
+			<br><br><br>
+			<p style="float:left; padding-left:40px"><input type="checkbox" id="plus_orbs" onClick="selectColor(activeColor)">Plus Orbs</p> 
+			<br><br><br>
+			<p style="float:left;padding-left:20px"><button id=board_change onclick="fullBoard()">Change Whole Board</button></p>
+			<p style="float:left;padding-left:20px"><button id=board_change onclick="randomize()">Refresh Board</button></p>
+			<p style="float:left;padding-left:20px"><button id=board_change onclick="resetBoard()">Reset Board</button></p>
+			<br><br><br>
+
+			<p style="float:left;padding-left:70px;padding-top:10px"><button id="run" style="font-size:20px" onclick="runSolve()">Run</button></p>
+
+			<div style="width:170px;float:left; padding-left:65px; ">
+				Leader Multiplier: <input type="text" id="L_mult" style="width:35px;float:right" value="1"> <br><br>
+				Friend Multiplier: <input type="text" id="F_mult" style="width:35px;float:right" value="1"> <br><br>
+				Active Multiplier: <input type="text" id="A_mult" style="width:35px;float:right" value="1"> <br><br>
+			</div>
+
+		</div>
+			  		
+		<div style="clear:both;"></div>
+		
+		<!--  CARD 1  -->
+		<div id="card1" style="float:left;padding-left:20px;width:80px">
+			<p type="text" id="card1DMG" style="width:75px;text-align:center;margin-top:5px;margin-bottom:2px">0</p>
+			<p type="text" id="card1DMG_sub" style="width:75px;text-align:center;margin-top:0px;margin-bottom:5px">0</p>
+			<img src="tamadra.png" width="75px" style="margin-left:2px"> <br>
+
+			<select id="card1_main" style="margin-left:8px" onChange="updateColors()">
+				<option value="red">Red</option><option value="blue">Blue</option><option value="green">Green</option>
+				<option value="dark">Dark</option><option value="light">Light</option><option value="none">None</option>
+			</select>	
+			<select id="card1_sub" style="margin-bottom:10px;margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>
+
+			<br>
+			Atk: <input type="text" id="card1ATK" style="width:35px;float:right" value="100">
+			<p style="margin-bottom:0px;margin-top:15px"></p>
+			TPAs: <input type="number" id="card1TPA" style="width:25px;float:right;margin-bottom:5px" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			Rows: <br>
+			<input type="number" id="card1Row_Main" style="width:30px;float:left;background-color:none" value="0">
+			<input type="number" id="card1Row_Sub" style="width:30px;float:right;background-color:none" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			+Enhances: <br>
+			<input type="number" id="card1_orbRed" style="width:22px;float:left;background-color:#FF6666" value="0">
+			<input type="number" id="card1_orbBlue" style="width:22px;float:left;background-color:lightblue;margin-left:1px" value="0">
+			<input type="number" id="card1_orbGreen" style="width:22px;float:right;background-color:lightgreen" value="0">
+			<input type="number" id="card1_orbDark" style="width:22px;float:left;background-color:#CC66FF;margin-left:13px" value="0">			
+			<input type="number" id="card1_orbLight" style="width:22px;float:right;background-color:#FFFF66;margin-right:14px" value="0">
+
+
+
+
+		</div>
+
+		<!--  CARD 2  -->
+		<div id="card2" style="float:left;padding-left:30px;width:80px">
+			<p type="text" id="card2DMG" style="width:75px;text-align:center;margin-top:5px;margin-bottom:2px">0</p>
+			<p type="text" id="card2DMG_sub" style="width:75px;text-align:center;margin-top:0px;margin-bottom:5px">0</p>
+			<img src="chibidra.png" width="75px" style="margin-left:2px"> <br>
+
+			<select id="card2_main" style="margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>	
+			<select id="card2_sub" style="margin-bottom:10px;margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>
+
+			<br>
+			Atk: <input type="text" id="card2ATK" style="width:35px;float:right" value="100">
+			<p style="margin-bottom:0px;margin-top:15px"></p>
+			TPAs: <input type="number" id="card2TPA" style="width:25px;float:right;margin-bottom:5px" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			Rows: <br>
+			<input type="number" id="card2Row_Main" style="width:30px;float:left;background-color:none" value="0">
+			<input type="number" id="card2Row_Sub" style="width:30px;float:right;background-color:none" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			+Enhances: <br>
+			<input type="number" id="card2_orbRed" style="width:22px;float:left;background-color:#FF6666" value="0">
+			<input type="number" id="card2_orbBlue" style="width:22px;float:left;background-color:lightblue;margin-left:1px" value="0">
+			<input type="number" id="card2_orbGreen" style="width:22px;float:right;background-color:lightgreen" value="0">
+			<input type="number" id="card2_orbDark" style="width:22px;float:left;background-color:#CC66FF;margin-left:13px" value="0">			
+			<input type="number" id="card2_orbLight" style="width:22px;float:right;background-color:#FFFF66;margin-right:14px" value="0">
+
+		</div>
+
+		<!--  CARD 3  -->
+		<div id="card3" style="float:left;padding-left:30px;width:80px">
+			<p type="text" id="card3DMG" style="width:75px;text-align:center;margin-top:5px;margin-bottom:2px">0</p>
+			<p type="text" id="card3DMG_sub" style="width:75px;text-align:center;margin-top:0px;margin-bottom:5px">0</p>
+			<img src="none.png" width="75px" style="margin-left:2px"> <br>
+
+			<select id="card3_main" style="margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>	
+			<select id="card3_sub" style="margin-bottom:10px;margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>
+
+			<br>
+			Atk: <input type="text" id="card3ATK" style="width:35px;float:right" value="0">
+			<p style="margin-bottom:0px;margin-top:15px"></p>
+			TPAs: <input type="number" id="card3TPA" style="width:25px;float:right;margin-bottom:5px" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			Rows: <br>
+			<input type="number" id="card3Row_Main" style="width:30px;float:left;background-color:none" value="0">
+			<input type="number" id="card3Row_Sub" style="width:30px;float:right;background-color:none" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			+Enhances: <br>
+			<input type="number" id="card3_orbRed" style="width:22px;float:left;background-color:#FF6666" value="0">
+			<input type="number" id="card3_orbBlue" style="width:22px;float:left;background-color:lightblue;margin-left:1px" value="0">
+			<input type="number" id="card3_orbGreen" style="width:22px;float:right;background-color:lightgreen" value="0">
+			<input type="number" id="card3_orbDark" style="width:22px;float:left;background-color:#CC66FF;margin-left:13px" value="0">			
+			<input type="number" id="card3_orbLight" style="width:22px;float:right;background-color:#FFFF66;margin-right:14px" value="0">
+
+		</div>
+
+		<!--  CARD 4  -->
+		<div id="card4" style="float:left;padding-left:30px;width:80px">
+			<p type="text" id="card4DMG" style="width:75px;text-align:center;margin-top:5px;margin-bottom:2px">0</p>
+			<p type="text" id="card4DMG_sub" style="width:75px;text-align:center;margin-top:0px;margin-bottom:5px">0</p>
+			<img src="none.png" width="75px" style="margin-left:2px"> <br>
+
+			<select id="card4_main" style="margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>	
+			<select id="card4_sub" style="margin-bottom:10px;margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>
+
+			<br>
+			Atk: <input type="text" id="card4ATK" style="width:35px;float:right" value="0">
+			<p style="margin-bottom:0px;margin-top:15px"></p>
+			TPAs: <input type="number" id="card4TPA" style="width:25px;float:right;margin-bottom:5px" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			Rows: <br>
+			<input type="number" id="card4Row_Main" style="width:30px;float:left;background-color:none" value="0">
+			<input type="number" id="card4Row_Sub" style="width:30px;float:right;background-color:none" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			+Enhances: <br>
+			<input type="number" id="card4_orbRed" style="width:22px;float:left;background-color:#FF6666" value="0">
+			<input type="number" id="card4_orbBlue" style="width:22px;float:left;background-color:lightblue;margin-left:1px" value="0">
+			<input type="number" id="card4_orbGreen" style="width:22px;float:right;background-color:lightgreen" value="0">
+			<input type="number" id="card4_orbDark" style="width:22px;float:left;background-color:#CC66FF;margin-left:13px" value="0">			
+			<input type="number" id="card4_orbLight" style="width:22px;float:right;background-color:#FFFF66;margin-right:14px" value="0">
+
+		</div>
+
+		<!--  CARD 5  -->
+		<div id="card1" style="float:left;padding-left:30px;width:80px">
+			<p type="text" id="card5DMG" style="width:75px;text-align:center;margin-top:5px;margin-bottom:2px">0</p>
+			<p type="text" id="card5DMG_sub" style="width:75px;text-align:center;margin-top:0px;margin-bottom:5px">0</p>
+			<img src="none.png" width="75px" style="margin-left:2px"> <br>
+
+			<select id="card5_main" style="margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>	
+			<select id="card5_sub" style="margin-bottom:10px;margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>
+
+			<br>
+			Atk: <input type="text" id="card5ATK" style="width:35px;float:right" value="0">
+			<p style="margin-bottom:0px;margin-top:15px"></p>
+			TPAs: <input type="number" id="card5TPA" style="width:25px;float:right;margin-bottom:5px" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			Rows: <br>
+			<input type="number" id="card5Row_Main" style="width:30px;float:left;background-color:none" value="0">
+			<input type="number" id="card5Row_Sub" style="width:30px;float:right;background-color:none" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			+Enhances: <br>
+			<input type="number" id="card5_orbRed" style="width:22px;float:left;background-color:#FF6666" value="0">
+			<input type="number" id="card5_orbBlue" style="width:22px;float:left;background-color:lightblue;margin-left:1px" value="0">
+			<input type="number" id="card5_orbGreen" style="width:22px;float:right;background-color:lightgreen" value="0">
+			<input type="number" id="card5_orbDark" style="width:22px;float:left;background-color:#CC66FF;margin-left:13px" value="0">			
+			<input type="number" id="card5_orbLight" style="width:22px;float:right;background-color:#FFFF66;margin-right:14px" value="0">
+
+		</div>
+
+		<!--  CARD 6  -->
+		<div id="card6" style="float:left;padding-left:30px;width:80px">
+			<p type="text" id="card6DMG" style="width:75px;text-align:center;margin-top:5px;margin-bottom:2px">0</p>
+			<p type="text" id="card6DMG_sub" style="width:75px;text-align:center;margin-top:0px;margin-bottom:5px">0</p>
+			<img src="none.png" width="75px" style="margin-left:2px"> <br>
+
+			<select id="card6_main" style="margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>	
+			<select id="card6_sub" style="margin-bottom:10px;margin-left:8px" onChange="updateColors()">
+				<option value="none">None</option><option value="red">Red</option><option value="blue">Blue</option>
+				<option value="green">Green</option><option value="dark">Dark</option><option value="light">Light</option>
+			</select>
+
+			<br>
+			Atk: <input type="text" id="card6ATK" style="width:35px;float:right" value="0">
+			<p style="margin-bottom:0px;margin-top:15px"></p>
+			TPAs: <input type="number" id="card6TPA" style="width:25px;float:right;margin-bottom:5px" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			Rows: <br>
+			<input type="number" id="card6Row_Main" style="width:30px;float:left;background-color:none" value="0">
+			<input type="number" id="card6Row_Sub" style="width:30px;float:right;background-color:none" value="0">
+			<p style="margin-bottom:0px;margin-top:10px"></p>
+			+Enhances: <br>
+			<input type="number" id="card6_orbRed" style="width:22px;float:left;background-color:#FF6666" value="0">
+			<input type="number" id="card6_orbBlue" style="width:22px;float:left;background-color:lightblue;margin-left:1px" value="0">
+			<input type="number" id="card6_orbGreen" style="width:22px;float:right;background-color:lightgreen" value="0">
+			<input type="number" id="card6_orbDark" style="width:22px;float:left;background-color:#CC66FF;margin-left:13px" value="0">			
+			<input type="number" id="card6_orbLight" style="width:22px;float:right;background-color:#FFFF66;margin-right:14px" value="0">
+
+		</div>
+
+		
+		<h1 id="grandTotal" style="float:left;margin-left:40px">Total Damage:</h1> 
+
+
+		
+		<div id="Model" style="padding-left:40px">
+		
+		</div>
+
+
+
+
+
+		
+
+	</body>
+</html>

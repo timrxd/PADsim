@@ -1,0 +1,21 @@
+Welcome.
+This is not pretty code.  It will get better.
+
+To Do:
+ - Line up elements
+ - Pull in team data
+ - Calculations
+	- Matches
+	- Combos
+	- + Orbs
+	- TPA's
+	- Rows
+	- Multipliers
+ - Skyfalls
+ - Redo Calculations
+ - 
+
+To Do Eventually:
+ - Move images to seperate folder
+ - Host on webserver
+ - 

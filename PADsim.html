@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="style.css">
+
+<body>
+
+<div id="header">
+<h1>PAD Board Sim</h1>
+</div>
+
+<div>
+<div id="left_side"></div>
+	
+	<div id="section">
+		
+		<img src="red_orb.png" alt="Red">
+		<img src="blue_orb.png" alt="Blue">
+		<img src="green_orb.png" alt="Green">
+		<img src="dark_orb.png" alt="Dark">
+		<img src="light_orb.png" alt="Light">
+		<img src="heart_orb.png" alt="Heart">
+		<p></p>
+		<img src="red_orb.png" alt="Red">
+		<img src="blue_orb.png" alt="Blue">
+		<img src="green_orb.png" alt="Green">
+		<img src="dark_orb.png" alt="Dark">
+		<img src="light_orb.png" alt="Light">
+		<img src="heart_orb.png" alt="Heart">
+		
+		<div class="floated_img">
+			<img src="dark_board.png" alt="Some image">
+			<p>Description of above image</p>
+		</div>
+		<div class="floated_img">
+			<img src="light_board.png" alt="Another image">
+			<p>Description of above image</p>
+		</div>
+				
+		<script>
+			function reverse() {
+				var s, rsf;
+				
+				s = document.getElementById("input").value;
+				rsf = "";
+				for (i = s.length-1; i >= 0; i--) { 
+						rsf += s[i];
+				}					
+				
+				document.getElementById("output").innerHTML = rsf;
+			}
+		
+			function turn_new() {
+				var color = document.getElementById("input2").value;
+				document.getElementById("box").style.backgroundColor = color;
+				document.getElementById("colorButton").onclick = turn_default;
+				document.getElementById("colorButton").innerHTML = "Default Color";
+			}
+			
+			function turn_default() {
+				document.getElementById("box").style.backgroundColor = "lightblue";
+				document.getElementById("colorButton").onclick = turn_new;
+				document.getElementById("colorButton").innerHTML = "New Color";
+			}
+			
+			
+		</script>
+		
+		
+		
+		
+
+	
+	
+	
+	</div>
+
+<div id="right_side"></div>
+</div>
+
+
+
+
+</body>
+</html>

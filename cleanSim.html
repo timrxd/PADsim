@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<script src="toolbox.js"></script>
+<link rel="stylesheet" href="style.css">
+
+	<body onload="startup()">
+
+		<div>
+			<p id="debug">Hello</p>
+		</div>
+	
+		<p id="output">	
+		
+		<div id=board style="float:left; width:301px; background-image:url('light_bg.png')" >
+			<img id="11"><img id="12"><img id="13"><img id="14"><img id="15"><img id="16"><br>
+			<img id="21"><img id="22"><img id="23"><img id="24"><img id="25"><img id="26"><br>
+			<img id="31"><img id="32"><img id="33"><img id="34"><img id="35"><img id="36"><br>
+			<img id="41"><img id="42"><img id="43"><img id="44"><img id="45"><img id="46"><br>
+			<img id="51"><img id="52"><img id="53"><img id="54"><img id="55"><img id="56"><br>
+		</div >	
+			
+		<div style="padding-left:20px">
+			<div style="float:left;padding-top:15px;padding-left:5px;padding-right5px">Orb Types:</div> 
+			  
+			<div style="float:left;width:50px"><img src="red_orb.png"><img id="red" onclick=selectColor("red") style="position:relative; top:-53px;z-index:1"src="empty.png"></div>
+			<div style="float:left;width:50px"><img src="blue_orb.png"><img id="blue" onclick=selectColor("blue") style="position:relative; top:-53px;z-index:1"src="empty.png"></div>
+			<div style="float:left;width:50px"><img src="green_orb.png"><img id="green" onclick=selectColor("green") style="position:relative; top:-53px;z-index:1"src="empty.png"></div>
+			<div style="float:left;width:50px"><img src="dark_orb.png"><img id="dark" onclick=selectColor("dark") style="position:relative; top:-53px;z-index:1"src="empty.png"></div>
+			<div style="float:left;width:50px"><img src="light_orb.png"><img id="light" onclick=selectColor("light") style="position:relative; top:-53px;z-index:1"src="empty.png"></div>
+			<div style="float:left;width:50px"><img src="heart_orb.png"><img id="heart" onclick=selectColor("heart") style="position:relative; top:-53px;z-index:1"src="empty.png"></div>
+			  
+		</div>
+			
+		<div style="padding-left:20px">
+			<br><br><br><br><br><br>
+			<p style="float:left;padding-left:20px"><button id=board_change onclick="fullBoard()">Change Whole Board</button></p>
+			<p style="float:left;padding-left:20px"><button id=board_change onclick="refresh()">Refresh Board</button></p>
+		</div>
+			  
+		
+		<div style="clear:both;">
+		<br>
+		<button id="run" onclick="solve()">Run</button>
+		<br>
+		</div>
+		
+		<div id="Leader" style="float:left;padding-left:20px">
+			<img src="okuni.png" width="75px"> <br>
+			H_ P: <input type="text" name="leaderHP" style="width:25px"><br>
+			ATK: <input type="text" name="leaderATK" style="width:25px"><br>
+			RCV: <input type="text" name="leaderRCV" style="width:25px"><br><br>
+			DAMAGE: <p type="text" name="leaderHP" style="width:25px">
+		</div>
+		<div id="Sub1" style="float:left;padding-left:20px">
+			<img src="okuni.png" width="75px"> <br>
+			HP: <br>ATK: <br>RCV: <br><br>
+			DAMAGE:
+		</div>
+		<div id="Sub2" style="float:left;padding-left:20px">
+			<img src="okuni.png" width="75px"> <br>
+			HP: <br>ATK: <br>RCV: <br><br>
+			DAMAGE:
+		</div>
+		<div id="Sub3" style="float:left;padding-left:20px">
+			<img src="okuni.png" width="75px"> <br>
+			HP: <br>ATK: <br>RCV: <br><br>
+			DAMAGE:
+		</div>
+		<div id="Sub4" style="float:left;padding-left:20px">
+			<img src="okuni.png" width="75px"> <br>
+			HP: <br>ATK: <br>RCV: <br><br>
+			DAMAGE:
+		</div>
+		<div id="Friend" style="float:left;padding-left:20px">
+			<img src="okuni.png" width="75px"> <br>
+			HP: <br>ATK: <br>RCV: <br><br>
+			DAMAGE:
+		</div>
+		
+		<div id="Model">
+		Model:<br>--------
+		</div>
+		
+		
+		
+
+		<script>
+			var board = Create2DArray(6);
+			var modelBoard = Create2DArray(6);
+			var activeColor = 'red_orb.png';	
+			
+			function createModelBoard() {			
+				
+				for(var i = 1; i <= 5; i++) {     // Row
+					for(var j = 1; j <= 6; j++) { // Column
+					
+						
+					
+						switch (board[i][j].src) {
+							case 'red_orb.png':
+								document.getElementById("debug").innerHTML = document.getElementById("debug").innerHTML + "Red";
+								break;
+						}
+						
+					
+					
+					}
+				}
+				
+				
+			}
+			
+			function solve() {
+				createModelBoard();
+			
+				groupOrbs(1,1);
+				
+			}
+			
+			function groupOrbs(x, y) {
+				board[1][1].src = "empty.png";
+				
+				
+				
+			}
+			
+			function match() {
+			
+			}
+						
+			function changeOrb(orb) {
+				orb.src = activeColor;
+			}
+			
+			function fullBoard() {
+				for(var i = 1; i <= 5; i++)      // Row
+					for(var j = 1; j <= 6; j++)  // Column
+					{
+						board[i][j].src = activeColor;	
+					}
+			}
+			
+			function selectColor(color) {
+				document.getElementById("red").src = 'empty.png';
+				document.getElementById("blue").src = 'empty.png';
+				document.getElementById("green").src = 'empty.png';
+				document.getElementById("light").src = 'empty.png';
+				document.getElementById("dark").src = 'empty.png';
+				document.getElementById("heart").src = 'empty.png';
+				
+				document.getElementById(color).src = 'glow.png';
+				
+				switch(color) {
+					case "red":
+						activeColor = 'red_orb.png';
+						break;
+					case "blue":
+						activeColor = 'blue_orb.png';
+						break;
+					case "green":
+						activeColor = 'green_orb.png';
+						break;
+					case "dark":
+						activeColor = 'dark_orb.png';
+						break;
+					case "light":
+						activeColor = 'light_orb.png';
+						break;
+					case "heart":
+						activeColor = 'heart_orb.png';
+						break;
+					
+				}
+				
+				document.getElementById("debug").innerHTML = "glow";
+			}
+		
+			function startup() {
+			
+				document.getElementById("debug").innerHTML = "startup successful";
+				
+				board[1][1] = new Image();
+				
+				for(var i = 1; i <= 5; i++)      // Row
+					for(var j = 1; j <= 6; j++)  // Column
+					{
+						board[i][j] = document.getElementById(""+i+j);
+						board[i][j].src = 'red_orb.png';	
+						board[i][j].setAttribute('onclick','changeOrb(this)');
+					}
+				refresh();
+				selectColor("red");
+				
+				document.getElementById("debug").innerHTML = document.getElementById("debug").innerHTML+" "+"startup finished";
+				
+			}
+			
+			function refresh() {
+				for(var i = 1; i <= 5; i++)      // Row
+					for(var j = 1; j <= 6; j++)  // Column
+					{					
+						switch(Math.floor(Math.random()*6)+1) {
+							case 1:	
+								board[i][j].src = 'red_orb.png';		
+								break;
+							case 2:	
+								board[i][j].src = 'blue_orb.png';		
+								break;
+							case 3:	
+								board[i][j].src = 'green_orb.png';		
+								break;
+							case 4:	
+								board[i][j].src = 'dark_orb.png';		
+								break;
+							case 5:	
+								board[i][j].src = 'light_orb.png';		
+								break;
+							case 6:	
+								board[i][j].src = 'heart_orb.png';		
+								break;							
+						}
+											
+					}
+				
+			}
+			
+		</script>
+	
+
+
+	</body>
+</html>
