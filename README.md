@@ -9,7 +9,7 @@ Assets will be moved into proper folders when I get a chance.
 Making the interface pretty was not a priority, I just wanted it to be compact.
 If I continue this, I'll probably rewrite the whole thing in python.
 
-Also, there's technically a bug in the match-3 algorithm:
+Also, there's technically a bug in the match-3 algorithm (on purpose):
 
 0 0 0 0 0 0 
 
